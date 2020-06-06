@@ -18,7 +18,7 @@ client.on('message', message => {
 		if (message.author.id !== '706667912613593098') {
 			console.log('message received from #server_chat')
 			const msg = {
-				message: '[' + message.author.username + ']:  ' + message.content,
+				message: '[' + message.author.username + ']: ' + message.content,
 				type: 'dmcchat',
 			}
 			ws.send(JSON.stringify(msg))
@@ -30,7 +30,7 @@ client.on('message', message => {
 		if (message.author.id !== '718914956023824518') {
 			console.log('message received from donfuer #party_chat')
 			const msg = {
-				message: '[' + message.author.username + '] ' + message.content,
+				message: '[' + message.author.username + ']: ' + message.content,
 				type: 'donfuer',
 			}
 			ws.send(JSON.stringify(msg))
