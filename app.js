@@ -15,10 +15,25 @@ client.on('message', message => {
 	// require messages to be in #server_chat
 	if (message.channel.id === '703037445201068032') {
 		// parse messages from webhook bot
-
 		if (message.author.id !== '706667912613593098') {
-			const msg = '<' + message.author.username + '>' + ' ' + message.content
-			ws.send(msg)
+			console.log('message received from #server_chat')
+			const msg = {
+				message: '[' + message.author.username + ']:  ' + message.content,
+				type: 'dmcchat',
+			}
+			ws.send(JSON.stringify(msg))
+		}
+	}
+	// Don fuer Party chat
+	if (message.channel.id === '718912872432009216') {
+		// webhook bot
+		if (message.author.id !== '718914956023824518') {
+			console.log('message received from donfuer #party_chat')
+			const msg = {
+				message: '[' + message.author.username + '] ' + message.content,
+				type: 'donfuer',
+			}
+			ws.send(JSON.stringify(msg))
 		}
 	}
 })
