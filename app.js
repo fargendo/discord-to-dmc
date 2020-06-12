@@ -21,19 +21,23 @@ client.on('message', message => {
 				message: '[' + message.author.username + ']:  ' + message.content,
 				type: 'dmcchat',
 			}
-			ws.send(JSON.stringify(msg))
+			if (msg.message.length <= 256) {
+				ws.send(JSON.stringify(msg))
+			}
 		}
 	}
 	// Don fuer Party chat
 	if (message.channel.id === '718912872432009216') {
 		// webhook bot
-		if (message.author.id !== '718914956023824518') {
+		if (message.author.id !== '718914956023824518' && message.author.id !== '163016436854423553') {
 			console.log('message received from donfuer #party_chat')
 			const msg = {
 				message: '[' + message.author.username + '] ' + message.content,
 				type: 'donfuer',
 			}
-			ws.send(JSON.stringify(msg))
+			if (msg.message.length <= 256) {
+				ws.send(JSON.stringify(msg))
+			}
 		}
 	}
 })
