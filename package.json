@@ -1,26 +1,27 @@
 {
-  "name": "discord-to-mc",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fargendo/discord-to-dmc.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fargendo/discord-to-dmc/issues"
-  },
-  "homepage": "https://github.com/fargendo/discord-to-dmc#readme",
-  "dependencies": {
-    "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0",
-    "ws": "^7.3.0"
-  }
+	"name": "discord-to-mc",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fargendo/discord-to-dmc.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/fargendo/discord-to-dmc/issues"
+	},
+	"homepage": "https://github.com/fargendo/discord-to-dmc#readme",
+	"dependencies": {
+		"discord.js": "^12.2.0",
+		"dotenv": "^8.2.0",
+		"ws": "^7.3.0",
+		"node-fetch": "2.6.1"
+	}
 }
