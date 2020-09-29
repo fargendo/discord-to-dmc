@@ -39,9 +39,6 @@ client.on('message', message => {
 				ws.send(JSON.stringify(msg))
 			}
 		}
-		if (message.author.id == '163016436854423553') {
-			message.author.send('Fuck you whygood')
-		}
 	}
 })
 
