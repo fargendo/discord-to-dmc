@@ -31,7 +31,7 @@ ws.on('message', function incoming(data) {
 		channel.send(combinedMessage)
 	}
 	if (payload.type === 'playersLength') {
-		console.log(payload.playersLength)
+		console.log('players: ' + payload.playersLength)
 		numberOfPlayers = payload.playersLength
 		client.user.setActivity(`NA with ${numberOfPlayers} online`)
 	}
@@ -47,7 +47,6 @@ client.on('message', message => {
 		// parse messages from webhook bot
 
 		if (message.author.id !== webhook_id) {
-			console.log('message received from #server_chat')
 			const msg = {
 				message: '[' + message.author.username + ']: ' + message.content,
 				type: 'na_chat',
