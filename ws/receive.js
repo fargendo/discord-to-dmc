@@ -27,6 +27,7 @@ const receive = (data, client, commandChannelId) => {
 	}
 	if (payload.type === 'status_response') {
 		let active = payload.activeBots
+		console.log(payload.activeBots)
 		let botOneOnline = false
 		let botTwoOnline = false
 		let botThreeOnline = false
