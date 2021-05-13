@@ -2,6 +2,7 @@ const WebSocket = require('ws')
 const fetch = require('node-fetch')
 
 const wss = new WebSocket.Server({ port: 9000 })
+require('./app.js')
 require('./commandChannel.js')
 
 // const test = () => {
