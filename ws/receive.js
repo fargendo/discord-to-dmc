@@ -78,6 +78,30 @@ const receive = (data, client, commandChannelId) => {
 			.setFooter('Sponsored by VenomShop')
 		commandChannel.send({ embed: exampleEmbed })
 	}
+	//bot logged in
+	if (payload.type === 'bot_online') {
+		const name = payload.name
+		const exampleEmbed = new Discord.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('<:weedman:730908578873081937> ' + name + ' is **ONLINE!**')
+
+			.setTimestamp()
+		commandChannel.send({ embed: exampleEmbed })
+		// payload.type = 'status'
+		// ws.send(JSON.stringify(payload))
+	}
+	//bot offline
+	if (payload.type === 'bot_offline') {
+		const name = payload.name
+		const exampleEmbed = new Discord.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('<:sheeeiiittt:807282754361360394> ' + name + ' has **DISCONNECTED!**')
+
+			.setTimestamp()
+		commandChannel.send({ embed: exampleEmbed })
+		// payload.type = 'status'
+		// ws.send(JSON.stringify(payload))
+	}
 }
 
 module.exports = receive
