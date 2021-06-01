@@ -102,6 +102,37 @@ const receive = (data, client, commandChannelId) => {
 		// payload.type = 'status'
 		// ws.send(JSON.stringify(payload))
 	}
+	//player is online
+	if (payload.type === 'player_ignored') {
+		const playerName = payload.playerName
+		console.log(playerName + ' has been ignored.')
+		const exampleEmbed = new Discord.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle(playerName + ' has been ignored <:weedman:730908578873081937>')
+
+			.setTimestamp()
+		commandChannel.send({ embed: exampleEmbed })
+	}
+	if (payload.type === 'player_not_ignored') {
+		const playerName = payload.playerName
+		console.log(playerName + ' has not been ignored')
+		const exampleEmbed = new Discord.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle(playerName + ' is not online <:sheeeiiittt:807282754361360394>')
+
+			.setTimestamp()
+		commandChannel.send({ embed: exampleEmbed })
+	}
+	if (payload.type === 'bot_xp') {
+		const botName = payload.botName
+		console.log(botName + ' is level ' + payload.level)
+		const exampleEmbed = new Discord.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle(botName + ' is level **' + payload.level + '**')
+
+			.setTimestamp()
+		commandChannel.send({ embed: exampleEmbed })
+	}
 }
 
 module.exports = receive

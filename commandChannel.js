@@ -14,6 +14,7 @@ const commandChannelId = '841481657026478170'
 
 const webhookId = '717064852363018300'
 const masterAuthorId = '123577074710609924'
+const botMasterRole = '849116787223298048'
 
 ws.on('message', function incoming(data) {
 	receive(data, client, commandChannelId)
@@ -25,9 +26,15 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	// require messages to be in #server_chat
+	if (!message.guild) return
 	if (message.channel.id === commandChannelId) {
 		// parse messages from webhook bot
 		if (message.author.id !== webhookId) {
+			let hasBotMasterRole = false
+			if (message.member.roles.cache.has(botMasterRole)) {
+				hasBotMasterRole = true
+				console.log('has bot master role')
+			}
 			const content = message.content
 			console.log('base message: ' + content)
 			if (content.length <= 256 && content.startsWith('!status')) {
@@ -37,9 +44,19 @@ client.on('message', message => {
 				}
 
 				ws.send(JSON.stringify(msg))
+			} else if (content.length <= 256 && content.startsWith('!xp')) {
+				let botName = message.content.split(' ')
+				botName = botName[1].toLowerCase()
+				console.log('!xp ' + botName)
+				let msg = {
+					type: 'xp_level',
+					botName: botName,
+				}
+
+				ws.send(JSON.stringify(msg))
 			}
 			//restart
-			if (
+			else if (
 				content.length <= 256 &&
 				content.startsWith('!restart') &&
 				message.author.id == masterAuthorId
@@ -59,7 +76,7 @@ client.on('message', message => {
 				}
 			}
 			//stop
-			if (
+			else if (
 				content.length <= 256 &&
 				content.startsWith('!stop') &&
 				message.author.id == masterAuthorId
@@ -85,7 +102,7 @@ client.on('message', message => {
 				}
 			}
 			//start
-			if (
+			else if (
 				content.length <= 256 &&
 				content.startsWith('!start') &&
 				message.author.id == masterAuthorId
@@ -104,9 +121,21 @@ client.on('message', message => {
 					const cmdChannel = client.channels.cache.get(commandChannelId)
 					error(cmdChannel)
 				}
-			}
+			} else if (
+				content.length <= 256 &&
+				(content.startsWith('!mute') || content.startsWith('!ignore')) &&
+				(message.author.id == masterAuthorId || hasBotMasterRole)
+			) {
+				let playerName = message.content.split(' ')
+				playerName = playerName[1].toLowerCase()
+				console.log(playerName)
+				let msg = {
+					type: 'player_check',
+					playerName: playerName,
+				}
 
-			if (content.length <= 256 && content.startsWith('!help')) {
+				ws.send(JSON.stringify(msg))
+			} else if (content.length <= 256 && content.startsWith('!help')) {
 				const cmdChannel = client.channels.cache.get(commandChannelId)
 				const exampleEmbed = new Discord.MessageEmbed()
 					.setColor('#0099ff')
@@ -116,20 +145,29 @@ client.on('message', message => {
 							value: 'Gets the status of the bots.',
 						},
 						{
-							name: '!start <name>',
-							value: 'Starts the bot.',
+							name: '!xp <bot>',
+							value: 'Gets the xp level of a bot.',
 						},
+						// {
+						// 	name: '!start <name>',
+						// 	value: 'Starts the bot.',
+						// },
+						// {
+						// 	name: '!stop <name>',
+						// 	value: 'Stops the bot.',
+						// },
+						// {
+						// 	name: '!restart <name>',
+						// 	value: 'Restarts the bot.',
+						// },
 						{
-							name: '!stop <name>',
-							value: 'Stops the bot.',
-						},
-						{
-							name: '!restart <name>',
-							value: 'Restarts the bot.',
+							name: '!mute <name>',
+							value: '/ignores a player in game (Bot Master only).',
 						},
 					])
 					.setTitle(`If !status doesn't work then ${process.env.BOT_ONE} is offline.`)
 				cmdChannel.send({ embed: exampleEmbed })
+			} else {
 			}
 		}
 	}
