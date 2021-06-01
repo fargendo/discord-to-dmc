@@ -63,6 +63,7 @@ client.on('message', message => {
 			) {
 				let botName = message.content.split(' ')
 				botName = botName[1].toLowerCase()
+				if (!botName) return
 				if (
 					botName === process.env.BOT_ONE.toLowerCase() ||
 					botName === process.env.BOT_TWO.toLowerCase() ||
@@ -83,6 +84,7 @@ client.on('message', message => {
 			) {
 				let botName = message.content.split(' ')
 				botName = botName[1].toLowerCase()
+				if (!botName) return
 				console.log(botName)
 				if (
 					botName === process.env.BOT_ONE.toLowerCase() ||
@@ -109,6 +111,7 @@ client.on('message', message => {
 			) {
 				let botName = message.content.split(' ')
 				botName = botName[1].toLowerCase()
+				if (!botName) return
 				if (
 					botName === process.env.BOT_ONE.toLowerCase() ||
 					botName === process.env.BOT_TWO.toLowerCase() ||
@@ -127,6 +130,8 @@ client.on('message', message => {
 				(message.author.id == masterAuthorId || hasBotMasterRole)
 			) {
 				let playerName = message.content.split(' ')
+				if (!playerName) return
+
 				playerName = playerName[1].toLowerCase()
 				console.log(playerName)
 				let msg = {
