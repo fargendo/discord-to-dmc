@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 const receive = (data, client, commandChannelId) => {
 	const payload = JSON.parse(data)
 	const commandChannel = client.channels.cache.get(commandChannelId)
-	const chatChannelId = '800076482357231657'
+	const chatChannelId = '859619010479783996'
 	const chatChannel = client.channels.cache.get(chatChannelId)
 	let combinedMessage
 

@@ -7,7 +7,7 @@ const client = new Discord.Client()
 const URL = 'ws://localhost:9000'
 ws = new WebSocket(URL)
 
-const server_chat_channel_id = '800076482357231657'
+const server_chat_channel_id = '859619010479783996'
 const webhook_id = '717064852363018300'
 
 client.once('ready', () => {
